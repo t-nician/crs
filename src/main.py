@@ -8,12 +8,13 @@ from crs.server import ServerSocket
 
 
 def client_main():
-    client = ClientSocket()
+    client = ClientSocket(
+        connect_on_initialize=True
+    )
 
 
 def server_main():
-    pass
-
+    ServerSocket().start()
 
 
 if __name__ == "__main__":

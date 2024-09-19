@@ -18,7 +18,7 @@ class BaseSocket(BaseModel):
     )
     
     socket_type: SocketType = Field(default=SocketType.UNKNOWN)
-    establish_connection_on_initialize: bool = Field(default=False)
+    connect_on_initialize: bool = Field(default=False)
     
     
     def model_post_init(self, __context: Any) -> None:
