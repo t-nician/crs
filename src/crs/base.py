@@ -29,7 +29,7 @@ class BaseSocket(BaseModel):
                 case SocketType.CLIENT:
                     self.client_connect()
                 case _:
-                    raise Exception(f"establish_connection_on_initialize true but {self.socket_type} is unknown!")
+                    raise Exception(f"establish_connection_on_initialize true but socket_type is {self.socket_type}!")
         
         return super().model_post_init(__context)
     
