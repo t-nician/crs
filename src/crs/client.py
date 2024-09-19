@@ -7,4 +7,4 @@ from crs.base import BaseSocket, SocketType
 
 
 class ClientSocket(BaseSocket):
-    socket_type: SocketType = Field(default=SocketType.SERVER)
+    socket_type: SocketType = Field(default=SocketType.CLIENT)

@@ -20,16 +20,16 @@ class BaseSocket(BaseModel):
     socket_type: SocketType = Field(default=SocketType.UNKNOWN)
     connect_on_initialize: bool = Field(default=False)
     
-    _socket: socket = Field(
+    self_socket: socket = Field(
         default_factory=lambda: socket(AF_INET, SOCK_STREAM)
     )
+    
+    model_config: ConfigDict = ConfigDict(arbitrary_types_allowed=True)
     
     
     def model_post_init(self, __context: Any) -> None:
         if self.connect_on_initialize:
             match self.socket_type:
-                case SocketType.SERVER:
-                    self.server_establish()
                 case SocketType.CLIENT:
                     self.client_establish()
                 case _:
