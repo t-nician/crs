@@ -34,7 +34,8 @@ class BaseSocket(BaseModel):
         return super().model_post_init(__context)
     
     """
-        Establish connection 
+        Establish connection exchange
+        
     """
     
     def server_connect(self):
