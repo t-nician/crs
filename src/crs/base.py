@@ -20,14 +20,18 @@ class BaseSocket(BaseModel):
     socket_type: SocketType = Field(default=SocketType.UNKNOWN)
     connect_on_initialize: bool = Field(default=False)
     
+    _socket: socket = Field(
+        default_factory=lambda: socket(AF_INET, SOCK_STREAM)
+    )
+    
     
     def model_post_init(self, __context: Any) -> None:
         if self.connect_on_initialize:
             match self.socket_type:
                 case SocketType.SERVER:
-                    self.server_connect()
+                    self.server_establish()
                 case SocketType.CLIENT:
-                    self.client_connect()
+                    self.client_establish()
                 case _:
                     raise Exception(f"connect_on_initialize true but socket_type is {self.socket_type}!")
         
@@ -38,9 +42,9 @@ class BaseSocket(BaseModel):
         
     """
     
-    def server_connect(self):
+    def server_establish(self, client_socket: socket):
         pass
     
     
-    def client_connect(self):
+    def client_establish(self):
         pass

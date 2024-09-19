@@ -11,6 +11,8 @@ def client_main():
     client = ClientSocket(
         connect_on_initialize=True
     )
+    
+    # client.client_connect() is ran when connect_on_initialize is true
 
 
 def server_main():
