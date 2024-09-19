@@ -20,19 +20,22 @@ class BaseSocket(BaseModel):
     socket_type: SocketType = Field(default=SocketType.UNKNOWN)
     establish_connection_on_initialize: bool = Field(default=False)
     
+    
     def model_post_init(self, __context: Any) -> None:
         if self.establish_connection_on_initialize:
             match self.socket_type:
                 case SocketType.SERVER:
-                    pass
-                
+                    self.server_connect()
                 case SocketType.CLIENT:
-                    pass
-                
-                case SocketType.UNKNOWN:
-                    raise Exception("establish_connection_on_initialize true but socket_type is unknown!")
+                    self.client_connect()
+                case _:
+                    raise Exception(f"establish_connection_on_initialize true but {self.socket_type} is unknown!")
         
         return super().model_post_init(__context)
+    
+    """
+        Establish connection 
+    """
     
     def server_connect(self):
         pass
