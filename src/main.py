@@ -13,9 +13,10 @@ def client_main():
         connect_on_initialize=True
     )
     
+    client.connect()
     # client.client_establish() is ran when connect_on_initialize is true
 
-    
+
 
 
 def server_main():
