@@ -6,6 +6,10 @@ from crs.base import SocketType
 from crs.client import ClientSocket
 from crs.server import ServerSocket
 
+from crs.protocol import MessageType, CommandType
+
+print(MessageType.ACKNOWLEDGE.value)
+
 
 def client_main():
     print("client_main ran")
