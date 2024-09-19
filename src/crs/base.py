@@ -22,14 +22,14 @@ class BaseSocket(BaseModel):
     
     
     def model_post_init(self, __context: Any) -> None:
-        if self.establish_connection_on_initialize:
+        if self.connect_on_initialize:
             match self.socket_type:
                 case SocketType.SERVER:
                     self.server_connect()
                 case SocketType.CLIENT:
                     self.client_connect()
                 case _:
-                    raise Exception(f"establish_connection_on_initialize true but socket_type is {self.socket_type}!")
+                    raise Exception(f"connect_on_initialize true but socket_type is {self.socket_type}!")
         
         return super().model_post_init(__context)
     
