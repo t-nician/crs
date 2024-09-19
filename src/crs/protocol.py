@@ -9,5 +9,3 @@ class MessageType(Enum):
 
 class CommandType(Enum):
     pass
-
-

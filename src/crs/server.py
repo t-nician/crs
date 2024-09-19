@@ -1,3 +1,4 @@
+from threading import Thread
 from socket import socket, AF_INET, SOCK_STREAM
 
 from pydantic import BaseModel, Field, ConfigDict
@@ -30,4 +31,8 @@ class ServerSocket(BaseSocket):
         
         while True:
             client_socket, _ = self.self_socket.accept()
-            self.__server_establish(client_socket)
+            
+            Thread(
+                target=self.__server_establish, args=(client_socket,)
+            ).start()
+            #self.__server_establish(client_socket)
