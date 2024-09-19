@@ -1,5 +1,5 @@
+from typing import Any
 from socket import socket, AF_INET, SOCK_STREAM
-
 
 from pydantic import BaseModel, Field, ConfigDict
 
@@ -9,6 +9,7 @@ from crs.protocol import MessageType, CommandType
 
 class ClientSocket(BaseSocket):
     socket_type: SocketType = Field(default=SocketType.CLIENT)
+    replication_sheet: dict[str, Any] = Field(default_factory=dict)
     
     def __client_establish(self):
         self.self_socket.send(MessageType.ACKNOWLEDGE.value)
