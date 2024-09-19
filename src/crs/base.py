@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field, ConfigDict
 class SocketType(Enum):
     SERVER = "SERVER_SOCKET"
     CLIENT = "CLIENT_SOCKET"
+    
     UNKNOWN = "UNKNOWN_SOCKET"
 
 
@@ -25,26 +26,3 @@ class BaseSocket(BaseModel):
     )
     
     model_config: ConfigDict = ConfigDict(arbitrary_types_allowed=True)
-    
-    
-    def model_post_init(self, __context: Any) -> None:
-        if self.connect_on_initialize:
-            match self.socket_type:
-                case SocketType.CLIENT:
-                    self.client_establish()
-                case _:
-                    raise Exception(f"connect_on_initialize true but socket_type is {self.socket_type}!")
-        
-        return super().model_post_init(__context)
-    
-    """
-        Establish connection exchange
-        
-    """
-    
-    def server_establish(self, client_socket: socket):
-        pass
-    
-    
-    def client_establish(self):
-        pass

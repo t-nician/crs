@@ -15,6 +15,8 @@ def client_main():
     
     # client.client_establish() is ran when connect_on_initialize is true
 
+    
+
 
 def server_main():
     print("server_main ran")
